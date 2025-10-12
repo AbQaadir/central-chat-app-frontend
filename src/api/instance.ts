@@ -1,14 +1,13 @@
 import axios from "axios";
 
 export const getChatInstance = () => {
-  // Check if window.config is available, with fallback
-  const config = (window as any).config;
-  const baseURL = config?.choreoApiUrl || 'http://localhost:8080';
+  // Check if window.configs is available, with fallback (following Choreo documentation)
+  const apiUrl = (window as any)?.configs?.apiUrl ? (window as any).configs.apiUrl : "/";
   
-  console.log('API Base URL:', baseURL); // For debugging
+  console.log('API Base URL:', apiUrl); // For debugging
   
   return axios.create({ 
-    baseURL,
+    baseURL: apiUrl,
     headers: {
       'Content-Type': 'application/json'
     },
